@@ -1,47 +1,143 @@
-class 11-13:
+# Node.js Modules and Express Setup - Classes 11-14
 
--1. global 0. file -> module
+## Classes 11-13: Node.js Modules
 
-1.  exports, module, require, **filename, **dirname -> module wrapper function.
-2.  custom module.
-3.  built in module -> os - cpus() - freemem() - totalmem() -> path - resolve() - join() - parse()
-    -> eventEmitter - on ('event name', callback) - emit ('event_name') -> fs - readFile -
-    readFileSync - writeFileSync class FileSystem extends EventEmitter {
+### 1. Module Wrapper Function
 
-            }
+Node.js wraps all modules in a wrapper function that provides:
 
-    -> http - createServer - listen
+- `exports` - Object to export module functionality
+- `module` - Reference to current module
+- `require` - Function to import modules
+- `__filename` - Absolute path of current module file
+- `__dirname` - Directory name of current module
 
-4.  http -> eventEmitter
-5.  express -> http (Node.js)
-6.  node -> framework -> nest.js -> express
+### 2. Custom Modules
+
+Creating your own modules for reusable code.
+
+### 3. Built-in Modules
+
+#### OS Module
+
+```js
+const os = require('os');
+
+os.cpus()        // Get CPU information
+os.freemem()     // Get free memory
+os.totalmem()    // Get total memory
+```
+
+#### Path Module
+
+```js
+const path = require('path');
+
+path.resolve()   // Resolve absolute path
+path.join()      // Join path segments
+path.parse()     // Parse path into components
+```
+
+#### EventEmitter Module
+
+```js
+const EventEmitter = require('events');
+
+const emitter = new EventEmitter();
+
+emitter.on('event_name', callback);    // Listen for events
+emitter.emit('event_name');           // Emit events
+```
+
+#### File System Module
+
+```js
+const fs = require('fs');
+
+fs.readFile()      // Asynchronous file reading
+fs.readFileSync()  // Synchronous file reading
+fs.writeFileSync() // Synchronous file writing
+```
+
+#### HTTP Module
+
+```js
+const http = require('http');
+
+http.createServer()  // Create HTTP server
+server.listen()      // Start listening on port
+```
+
+### 4. HTTP as EventEmitter
+
+HTTP module extends EventEmitter, allowing event-driven programming.
+
+### 5. Express Framework
+
+Express is built on top of Node.js HTTP module.
+
+### 6. Node.js Frameworks
+
+- **Express** - Most popular web framework
+- **Nest.js** - Enterprise-grade framework
 
 ---
 
-calss 14:
+## Class 14: Express Setup and Project Structure
 
-    business -> PM
-    engineering -> senior engineer / team lead/ software engineer
-    engineering knowledge -> intern, junior engineer, software engineer
-    programming -> university.
-    programming knowledge -> university.
-    ------------
+### Team Structure
 
-1. npm init -y // to get the package.json file.
-2. npm install express
-3. require the express module from node modules.
-4. put the express module in an object.
-5. all the createServer method using the express object.
+- **Business** → Product Manager (PM)
+- **Engineering** → Senior Engineer / Team Lead / Software Engineer
+- **Engineering Knowledge** → Intern, Junior Engineer, Software Engineer
+- **Programming** → University
+- **Programming Knowledge** → University
 
-6. open browser and put localhost:3000 & hit enter.
-7. npm run start.
-8. install nodemon globally.
-9. npm run start.
+### Express Setup Steps
 
-task:
+1. **Initialize Project**
 
-1. post create;
-2. all post get;
-3. single post get;
-4. sinle post delte;
-5. single post update;
+   ```bash
+   npm init -y  # Create package.json file
+   ```
+
+2. **Install Express**
+
+   ```bash
+   npm install express
+   ```
+
+3. **Basic Server Setup**
+
+   ```js
+   const express = require('express');
+   const app = express();
+   
+   app.get('/', (req, res) => {
+       res.send('Hello World!');
+   });
+   
+   app.listen(3000, () => {
+       console.log('Server running on port 3000');
+   });
+   ```
+
+4. **Development Setup**
+
+   ```bash
+   npm install -g nodemon  # Install globally
+   npm run start          # Start development server
+   ```
+
+5. **Access Application**
+   - Open browser and navigate to `localhost:3000`
+
+### CRUD Operations Task
+
+Create a complete CRUD API for posts:
+
+1. **POST** `/posts` - Create new post
+2. **GET** `/posts` - Get all posts
+3. **GET** `/posts/:id` - Get single post
+4. **DELETE** `/posts/:id` - Delete single post
+5. **PUT** `/posts/:id` - Update single post

@@ -1,19 +1,53 @@
-Total database tables 7: 1. admins 2. permissions 3. permission_services 4. profiles 5.
-profile_permissions 6. services 7. users
+# Database Tables and Seeder Functions - Class 31
+
+## Database Tables Overview
+
+**Total Database Tables: 7**
+
+1. **admins** - Administrator accounts
+2. **permissions** - System permissions
+3. **permission_services** - Junction table linking permissions to services
+4. **profiles** - User profiles
+5. **profile_permissions** - Junction table linking profiles to permissions
+6. **services** - System services
+7. **users** - User accounts
 
 ---
 
-1. userSeeder function: i. will try to find an user using an email. ii. if not found then will
-   create the user using the email in where and password from the defaults. iii. after finding or
-   creating the thread of execution will execute the then block and will execute the callback
-   function in it.
+## Seeder Functions
 
-2. profileSeeder function: i. will try to find the admin. ii. will create a profile for the admin in
-   the profileSeeder functions then block. will be used the Profile tables properties. iii. system
-   admin is a standard type frofile. because it will be created by the programmer. but if a super
-   admin creates an admin then it will be a custom type profile.
-    - truncate property in database: cascade true.
-    1. details about truncate property:
-    2. details about cascading property in database:
+### 1. userSeeder Function
 
-    # new library : async
+**Process:**
+1. **Find User**: Tries to find a user using an email address
+2. **Create User**: If not found, creates the user using:
+   - Email from the `where` clause
+   - Password from the defaults configuration
+3. **Execute Callback**: After finding or creating, executes the `then` block and runs the callback function
+
+### 2. profileSeeder Function
+
+**Process:**
+1. **Find Admin**: Tries to find the admin user
+2. **Create Profile**: Creates a profile for the admin in the `profileSeeder` function's `then` block
+3. **Profile Properties**: Uses the Profile table's properties
+4. **Profile Types**:
+   - **System Admin**: Standard type profile (created by programmer)
+   - **Super Admin Created Admin**: Custom type profile (created by super admin)
+
+### Database Properties
+
+#### Truncate Property
+- **Cascade**: `true`
+- **Purpose**: When truncating a table, also truncate related tables
+
+#### Cascading Property Details
+- **Cascade Delete**: When a parent record is deleted, child records are automatically deleted
+- **Cascade Update**: When a parent record is updated, child records are automatically updated
+- **Referential Integrity**: Maintains data consistency across related tables
+
+### New Library: Async
+
+**Async Library**: Used for handling asynchronous operations in the seeder functions
+- Provides utilities for working with asynchronous JavaScript
+- Helps manage complex async flows in database seeding operations

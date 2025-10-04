@@ -1,97 +1,93 @@
-1.  execution context.
-    - defined in class 2 note
+## 1. Execution Context
+- Defined in class 2 note
 
-2.  callstack.
+## 2. Call Stack
 
-        A stack data structure used by JS engine to manage execution contexts.
-        Process:
-            - Global context is pushed first.
-            - Each function call pushes a new context.
-            - When a function finishes → it’s popped.
+A stack data structure used by JS engine to manage execution contexts.
 
-        Example:
-        ```
-            function a() { b(); }
-            function b() { console.log("Hello"); }
-            a();
-        ```
+Process:
+- Global context is pushed first.
+- Each function call pushes a new context.
+- When a function finishes → it's popped.
 
-    Call stack order: - Global → a() → b() → console.log()
+Example:
+```js
+function a() { b(); }
+function b() { console.log("Hello"); }
+a();
+```
 
-3.  function statement.
-    - When you define a function with a name.
-    - Fully hoisted → you can call it before it’s defined. Example:
+Call stack order: Global → a() → b() → console.log()
 
-    ```
-        greet();
-        function greet() {
-            console.log("Hello");
-        }
-    ```
+## 3. Function Statement
+- When you define a function with a name.
+- Fully hoisted → you can call it before it's defined.
 
-4.  function call.
-    - When you invoke/execute a function using parentheses ().
-    - Creates a new execution context.
-    - You can pass arguments to the function.
+Example:
+```js
+greet();
+function greet() {
+    console.log("Hello");
+}
+```
 
-    Example:
+## 4. Function Call
+- When you invoke/execute a function using parentheses ().
+- Creates a new execution context.
+- You can pass arguments to the function.
 
-    ```
-        greet(); // function call
-    ```
+Example:
+```js
+greet(); // function call
+```
 
-5.  arguments vs parameter.
-    - Parameters: variables in the function definition (like placeholders).
-    - Arguments: actual values you pass when calling the function.
+## 5. Arguments vs Parameters
+- **Parameters**: variables in the function definition (like placeholders).
+- **Arguments**: actual values you pass when calling the function.
 
-    Example:
+Example:
+```js
+function add(a, b) { // a & b = parameters
+    return a + b;
+}
+add(3, 4); // 3 & 4 = arguments
+```
 
-    ```
-        function add(a, b) { // a & b = parameters
-        return a + b;
-        }
-        add(3, 4); // 3 & 4 = arguments
-    ```
+## 6. Hoisting
+- JS engine moves variable and function declarations to the top of their scope during creation phase.
+- Functions are hoisted with definitions, variables only with undefined.
 
-6.  hoisting.
-    - JS engine moves variable and function declarations to the top of their scope during creation
-      phase.
-    - Functions are hoisted with definitions, variables only with undefined.
+Example:
+```js
+sayHi(); // works
+console.log(x); // undefined
 
-    Example:
+function sayHi() { console.log("Hello"); }
+var x = 10;
+```
 
-    ```
-        sayHi(); // works
-        console.log(x); // undefined
+## 7. Reference Error
 
-        function sayHi() { console.log("Hello"); }
-        var x = 10;
-    ```
+Happens when you try to use a variable that doesn't exist in memory.
 
-7.  reference error.
+Example:
+```js
+console.log(y); // ReferenceError: y is not defined
+```
 
-    Happens when you try to use a variable that doesn’t exist in memory.
+## 8. Type Error
 
-    Example:
+Happens when you try to perform an operation on a value of the wrong type.
 
-    ```
-        console.log(y); // ReferenceError: y is not defined
-    ```
+Example:
+```js
+var num = 5;
+num.toUpperCase(); // TypeError: num.toUpperCase is not a function
+```
 
-8.  type error.
-
-    Happens when you try to perform an operation on a value of the wrong type.
-
-    Example:
-
-    ```
-        var num = 5;
-        num.toUpperCase(); // TypeError: num.toUpperCase is not a function
-    ```
-
-9.  Big Picture
-    - Execution Context + Call Stack = How JS runs code
-    - Function statement + Function call = How functions are defined & used
-    - Arguments vs Parameters = How data passes into functions
-    - Hoisting = Why you can call functions before they are declared
-    - Reference Error & Type Error = Common runtime pitfalls
+## 9. Big Picture
+- Execution Context + Call Stack = How JS runs code
+- Function statement + Function call = How functions are defined & used
+- Arguments vs Parameters = How data passes into functions
+- Hoisting = Why you can call functions before they are declared
+- Reference Error & Type Error = Common runtime pitfalls

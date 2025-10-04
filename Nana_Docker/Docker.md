@@ -1,128 +1,186 @@
-# Introduction:
+# Docker Complete Guide - Nana Docker
 
-1. what is Docker? What is a Container?
-2. Docker vs Virtual machine.
-3. Docker Installation.
-4. Main Commands.
-5. Debugging a Container.
-6. Volumes - Persisting Data.
-7. Developing with Containers.
-8. Docker Co
-9. mpose - Running multiple services.
-10. Dockerfile - Building own Docker image.
-11. Private Docker Repository (AWS)
-12. Deploying the containerized App.
-13. Volumes Demo.
+## Introduction
 
--------------- class -1
+### Course Outline
 
-1. What is a container?
+1. **What is Docker? What is a Container?**
+2. **Docker vs Virtual Machine**
+3. **Docker Installation**
+4. **Main Commands**
+5. **Debugging a Container**
+6. **Volumes - Persisting Data**
+7. **Developing with Containers**
+8. **Docker Compose - Running Multiple Services**
+9. **Dockerfile - Building Own Docker Image**
+10. **Private Docker Repository (AWS)**
+11. **Deploying the Containerized App**
+12. **Volumes Demo**
 
-    i. A way to package application with all the necessary dependencies and configuration.
+---
 
-    ii. Portable artifact, easily shared and moved around.
+## Class 1: Container Fundamentals
 
-    iii. Makes development and deployment more efficient.
+### 1. What is a Container?
 
-2. where do containers live?
+**Definition**: A way to package application with all the necessary dependencies and configuration.
 
-    i. container repository. (postgres, redis, nodejs, nginx)
+**Characteristics**:
 
-    ii. Private repositories.
+- **Portable Artifact**: Easily shared and moved around
+- **Efficiency**: Makes development and deployment more efficient
 
-    iii. public repository for Docker: DockerHub. https://hub.docker.com/
+### 2. Where do Containers Live?
 
-3. Before containers the problems we had to face:
+**Container Repositories**:
 
-    i. Installation process different. On each OS environment. ii. Many steps where something could
-    go wrong and the system doesn't work.
+- **Public Repository**: [DockerHub](https://hub.docker.com/)
+- **Private Repositories**: For proprietary applications
+- **Examples**: postgres, redis, nodejs, nginx
 
-    iii. we had to install the binaries in different machine in order for the project to run in
-    them.
+### 3. Problems Before Containers
 
-4. After containers: i. own isolated environment.
+**Issues**:
 
-    ii. packaged with all neded configuration.
+- **Installation Process**: Different on each OS environment
+- **Error Prone**: Many steps where something could go wrong
+- **Binary Installation**: Had to install binaries on different machines for projects to run
 
-    iii. one comand to install the app.
+### 4. Benefits After Containers
 
-    iv. run same app with 2 different versions.
+**Advantages**:
 
-    A container will have the configurations and the start script. one just needs to know which
-    container he needs to find from the docker hub.
+- **Isolated Environment**: Own isolated environment
+- **Pre-configured**: Packaged with all needed configuration
+- **One Command**: One command to install the app
+- **Version Management**: Run same app with 2 different versions
 
-- Developers and operations work together to package the application in a container.
+**Key Points**:
 
-- no environmental configuration needed on server except docker runtime to run the containers.
+- Container has configurations and start script
+- Just need to know which container to find from Docker Hub
+- Developers and operations work together to package applications
+- No environmental configuration needed on server except Docker runtime
 
-------------- class 2
+---
 
-1. what is a container technically? i.Layers of images. mostly alpine. ii. mostly linux base image,
-   because small in size. iii. application image on top.
+## Class 2: Container Technical Details
 
-A practical example of a docker container:
+### What is a Container Technically?
 
-    comands:
-        1. in docker hub search postgresql.
-        2. in terminal docker run <the image name and version:> if not given the version then docker will download the latest one.
+**Structure**:
 
-        docker ps : to see the running containers.
+- **Layers of Images**: Mostly Alpine Linux
+- **Base Image**: Mostly Linux base image (small in size)
+- **Application Image**: Application image on top
 
-    docker image: its the actual package or artifact, which is movable.
+### Practical Example
 
-    container: an image which has been started in a machine is a container.
+**Commands**:
 
------class 4
+1. **Search**: In Docker Hub search for postgresql
+2. **Run**: `docker run <image name and version>`
+   - If version not given, Docker downloads the latest
 
-1. OS kernal layer: that comunicates with the hardware.
+**Key Terms**:
 
-2. applications layer: they are based on kernal.
+- **Docker Image**: The actual package or artifact, which is movable
+- **Container**: An image which has been started in a machine
 
-# Docker virtualization the Application layer. uses the kernal of the host.
+**Check Running Containers**:
 
-# VM virtualizes the OS. vs has its own os kernal on top of the host kernal.
+```bash
+docker ps  # See running containers
+```
 
-----class 5 docker install
+---
 
-------class 6
+## Class 4: Docker vs Virtual Machines
 
-# Different image and container
+### Architecture Comparison
 
-1. container is a running environment for image.
+**Docker**:
 
-2. container has virtual file system.
-3. port binded: talk to application running inside of container. port 5000
-4. application image: postgres, redis, mogo etc
+- **OS Kernel Layer**: Communicates with hardware
+- **Applications Layer**: Based on kernel
+- **Virtualization**: Docker virtualizes the Application layer
+- **Kernel Usage**: Uses the kernel of the host
 
-----class 7
+**Virtual Machine**:
 
-1. docker pull <image name> -> to pull image from the docker hub.
+- **Virtualization**: VM virtualizes the OS
+- **Own Kernel**: Has its own OS kernel on top of the host kernel
 
-2. docker images -> to view the existing images.
+---
 
-3. docker run <image name> -> to create the container and run the image into it.
+## Class 6: Images and Containers
 
-4. docker ps -> to check the running docker containers.
+### Key Differences
 
-5. couldn't find a way to close docker.
+1. **Container**: Running environment for image
+2. **Virtual File System**: Container has virtual file system
+3. **Port Binding**: Talk to application running inside container (port 5000)
+4. **Application Images**: postgres, redis, mongo, etc.
 
-6. docker run -d redis -> run the container in a detach mode.
+---
 
-7. docker stop id -> to stop a container.
+## Class 7: Essential Docker Commands
 
-8. docker start id -> to start the container.
+### Basic Commands
 
-# A docker container runs in a specific port. so to run 2 different versions of the same image we need to bind the ports. which is called port binding.
+```bash
+# Pull image from Docker Hub
+docker pull <image name>
 
-9. docker run -p6000:6379 redis -> in here p6000 is our host machines dedicated port which we are
-   assigning to the container image port which is 6379.
+# View existing images
+docker images
 
-10. docker logs (names or id of the container).
+# Create container and run image
+docker run <image name>
 
-11. docker run -d -p6001:6379 --name redis-older redis:6.0 -> to name the container by you want.
+# Check running Docker containers
+docker ps
 
-12. docker exec -it (container id) /bin/bast -> ls -> pwd -> cd / -> ls -> env ...etc
+# Run container in detached mode
+docker run -d redis
 
-13. docker image rm <image id> -> to remove the image from the system.
+# Stop a container
+docker stop <id>
 
----------project
+# Start a container
+docker start <id>
+```
+
+### Port Binding
+
+**Purpose**: A Docker container runs in a specific port. To run 2 different versions of the same image, we need port binding.
+
+```bash
+# Port binding example
+docker run -p6000:6379 redis
+# p6000: Host machine's dedicated port
+# 6379: Container image port
+```
+
+### Advanced Commands
+
+```bash
+# Name the container
+docker run -d -p6001:6379 --name redis-older redis:6.0
+
+# View container logs
+docker logs <container name or id>
+
+# Execute commands inside container
+docker exec -it <container id> /bin/bash
+# Then: ls -> pwd -> cd / -> ls -> env ...etc
+
+# Remove image from system
+docker image rm <image id>
+```
+
+---
+
+## Project Implementation
+
+*Project details and implementation steps would be covered in the actual course.*

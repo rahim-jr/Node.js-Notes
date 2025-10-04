@@ -1,38 +1,71 @@
-1. after getGlobalConfig.
+# Dynamic Routes and Authentication - Class 23
 
-    the flow:
-    1. install lodash,
-    2. install globe,
-    3. paste the getGlobbedPaths function.
+## After getGlobalConfig Implementation
 
-# Describing the getGlobbedPaths function:
+### Setup Flow
 
-    1. it requires 2 arguments upon function call:
-        i. globPatterns : the routes array which we got from default.js.
-        ii. excludes: the string that we want to exclude.
+1. **Install Dependencies**
+   ```bash
+   npm install lodash
+   npm install glob
+   ```
 
-    2. after calling the getGlobbedPaths function, the function returns us an array that has all the routes path in it as strings one by one.
+2. **Add getGlobbedPaths Function**
+   - Paste the `getGlobbedPaths` function into your project
 
-    * the work of this function is to match the patterns and get all the .routes files inside an array and return the array.
+## Understanding getGlobbedPaths Function
 
-    3. the getGlobbedPaths makes the routes included dynamically.
+### Function Parameters
 
-    'src/modules/**/*.routes.js' : ** makes sense folder. * make sense a file. .routes.js makes sense the file's ending.
+The `getGlobbedPaths` function requires 2 arguments:
 
-# status:
+1. **globPatterns**: Routes array from `default.js` configuration
+2. **excludes**: String patterns to exclude from matching
 
-    1. 404 : Not Found.
-    2. 500 : Internal Server Error.
-    3. 200 : success.
-    4. 400 : Bad Request.
-    5. 403: Forbidden.
-    # google api status code.
+### Function Behavior
 
-2. to use token:
-    1. install jsonwebtoken
+- **Returns**: Array containing all route paths as strings
+- **Purpose**: Matches patterns and collects all `.routes.js` files into an array
+- **Benefit**: Makes routes dynamically included instead of manually importing each one
 
-3. to make the cookieParser: cookie-parser.
+### Pattern Matching
 
-- when we are logged in fb, the fb gives us a token, the token can only be broken by the secret key.
+```js
+'src/modules/**/*.routes.js'
+```
 
-- to crack a token, hacker has to crack 2 secret.
+- `**` - Matches any folder (recursive)
+- `*` - Matches any file
+- `.routes.js` - Matches files ending with `.routes.js`
+
+## HTTP Status Codes
+
+| Code | Status | Description |
+|------|--------|-------------|
+| 200 | Success | Request completed successfully |
+| 400 | Bad Request | Invalid request data |
+| 403 | Forbidden | Access denied |
+| 404 | Not Found | Resource not found |
+| 500 | Internal Server Error | Server error |
+
+## Authentication Setup
+
+### JWT Token Implementation
+
+1. **Install jsonwebtoken**
+   ```bash
+   npm install jsonwebtoken
+   ```
+
+2. **Cookie Parser Setup**
+   ```bash
+   npm install cookie-parser
+   ```
+
+### Token Security
+
+- **Facebook Example**: When logged into Facebook, FB provides a token
+- **Security**: Token can only be decoded with the secret key
+- **Hacker Protection**: To crack a token, hackers must crack 2 secrets:
+  1. The token itself
+  2. The secret key used to sign it

@@ -1,4 +1,10 @@
-```javascript
+# Promise Under the Hood - Test Implementation
+
+## Promise Implementation Example
+
+### print Function
+
+```js
 function print(resolve, reject) {
     console.log("--------callback executed------------");
     console.log(resolve, reject);
@@ -8,29 +14,33 @@ function print(resolve, reject) {
         resolve(user);
     }, 2000);
 }
+```
 
-// Under the hood in promise
-/*
+### Promise Class Implementation (Under the Hood)
+
+```js
 class Promise {
     constructor(callback) {
         this.resolve = function(){};
         this.reject = function(){};
-        callback(this.resolve, this.reject); // it get's executed upon constructor call
+        callback(this.resolve, this.reject); // Gets executed upon constructor call
     }
      
     then = (cb1) => {
         this.resolve = cb1;
-
         return this;
     }
 
     catch = (cb2) => {
         this.reject = cb2;
-
         return this;
     }
 }
-*/
+```
+
+### Promise Usage
+
+```js
 console.log("Start");
 
 const prom1 = new Promise(print);
@@ -47,4 +57,31 @@ prom1
 console.log("end");
 ```
 
-- We have to use async before the function that has promise inside of it
+## Key Concepts
+
+### Promise Constructor
+
+- **Callback Execution**: The callback function is executed immediately when the Promise constructor is called
+- **Resolve/Reject**: Initially set as empty functions, later replaced by `.then()` and `.catch()` callbacks
+- **Return Value**: Returns the Promise instance for method chaining
+
+### Method Chaining
+
+- **`.then()`**: Sets the resolve callback and returns the Promise instance
+- **`.catch()`**: Sets the reject callback and returns the Promise instance
+- **Chaining**: Allows multiple `.then()` and `.catch()` calls
+
+### Async Function Requirement
+
+- **Important**: We have to use `async` before the function that has promise inside of it
+- **Purpose**: Enables the use of `await` keyword for cleaner async code
+
+### Execution Flow
+
+1. **Start**: Console logs "Start"
+2. **Promise Creation**: Creates Promise with print callback
+3. **Promise Object**: Logs the Promise object
+4. **Method Chaining**: Sets up `.then()` and `.catch()` handlers
+5. **End**: Console logs "end"
+6. **Async Execution**: After 2 seconds, resolves with user array
+7. **Callback Execution**: Logs "Call stack e ashsi" and resolves with `[1, 2, 3]`

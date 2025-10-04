@@ -1,139 +1,125 @@
-# dbdiagram.io
+# Database Design and Relationships - Class 28
 
-Database ER:
+## Database ER (Entity Relationship) Design
 
-- Unique column will be the primary key of the table.
+### Primary Keys
+- **Unique column** will be the **primary key** of the table
+- Ensures each record is uniquely identifiable
 
-Database Normalization:
+## Database Normalization
 
-- 1NF
-- 2NF
-- 3NF
+Database normalization follows these forms:
+- **1NF** (First Normal Form)
+- **2NF** (Second Normal Form)  
+- **3NF** (Third Normal Form)
 
-Relationships under posts and user table:
+## Table Relationships
 
-- Many-to-one relationship: If we go from above to below
-- One-to-many relationship: If we go from below to up
+### Posts and User Table Relationship
 
-POsts Table:
+**Directional Relationships:**
+- **Many-to-One**: Going from above to below (Posts → User)
+- **One-to-Many**: Going from below to up (User → Posts)
 
-- Primary key: id
-- Columns: content, owner (foreign key referencing user.id)
-- Sample data:
+### Posts Table Structure
 
-| id  | content    | owner |
-| --- | ---------- | ----- |
-| 1   | I love you | 1     |
-| 2   | u r        | 2     |
-| 3   | hey        | 3     |
-| 4   | ggg        | 1     |
+| Column | Type | Description |
+|--------|------|-------------|
+| id | Primary Key | Unique identifier |
+| content | Text | Post content |
+| owner | Foreign Key | References user.id |
 
-User Table:
+**Sample Data:**
+| id | content | owner |
+|----|---------|-------|
+| 1 | I love you | 1 |
+| 2 | u r | 2 |
+| 3 | hey | 3 |
+| 4 | ggg | 1 |
 
-- Primary key: id
-- Columns: name
-- Sample data:
+### User Table Structure
 
-| id  | name  |
-| --- | ----- |
-| 1   | habib |
-| 2   | riyad |
-| 3   | ruhin |
+| Column | Type | Description |
+|--------|------|-------------|
+| id | Primary Key | Unique identifier |
+| name | String | User name |
 
-Inconsistency Problem:
+**Sample Data:**
+| id | name |
+|----|------|
+| 1 | habib |
+| 2 | riyad |
+| 3 | ruhin |
 
-- If we change the name of a user in the User table, the name query will not work in the user table
-  if we use name as foreign key, leading to an inconsistency problem. that's why we are using
-  foreign key as user id.
+## Inconsistency Problem
 
-Student-Course Table:
+**Problem**: If we change a user's name in the User table, queries using the name as a foreign key will fail, causing inconsistency.
 
-- Columns: studentid, courses
-- Sample data:
+**Solution**: Use **user ID** as foreign key instead of name, ensuring data integrity.
 
-| studentid | courses    |
-| --------- | ---------- |
-| 1         | bangla,eng |
-| 2         | node,react |
-| 3         | mic        |
+## Student-Course Table Example
 
+### Before Normalization (Problematic)
 | studentid | courses |
-| --------- | ------- |
-| 1         | bangla  |
-| 1         | eng     |
-| 2         | node    |
-| 2         | react   |
-| 3         | mic     |
+|-----------|---------|
+| 1 | bangla,eng |
+| 2 | node,react |
+| 3 | mic |
 
-- On the above tabe we have maintained normalization that each field will only have singular value
+### After Normalization (Correct)
+| studentid | courses |
+|-----------|---------|
+| 1 | bangla |
+| 1 | eng |
+| 2 | node |
+| 2 | react |
+| 3 | mic |
 
-Cardinality and Ordinality:
+**Normalization Rule**: Each field contains only **singular values**.
 
-- The signs represent the following types of relationships:
-    - One-to-one
-    - One-to-many
-    - Many-to-one
-    - Many-to-many
+## Database Relationship Types
 
-There are 4 types of relationships in a database:
+There are **4 types** of relationships in databases:
 
-- One-to-one
-- One-to-many
-- Many-to-one
-- Many-to-many
+1. **One-to-One** (1:1)
+2. **One-to-Many** (1:M)
+3. **Many-to-One** (M:1)
+4. **Many-to-Many** (M:M)
 
-Permissions and Services:
+### Cardinality and Ordinality
+- **Cardinality**: Number of relationships
+- **Ordinality**: Direction of relationships
+- Symbols represent different relationship types
 
-- One single service can have multiple permissions (one-to-many)
-- One single permission can have multiple services (many-to-many)
+## Permissions and Services
 
-# Explaination of the dbdiagram:
+### Relationship Structure
+- **One Service** → **Multiple Permissions** (One-to-Many)
+- **One Permission** → **Multiple Services** (Many-to-Many)
 
-# User-Profile-Permission-Service Relationships
+## User-Profile-Permission-Service Relationships
 
-There will be multiple types of users, but each user will have only one profile. A profile will be
-made up of multiple permissions, and a permission can be in multiple profiles. A permission will be
-made with multiple services, and a service can be in multiple permissions.
+### System Overview
+- **Multiple user types**, each with **one profile**
+- **Profile** contains **multiple permissions**
+- **Permission** can belong to **multiple profiles**
+- **Permission** consists of **multiple services**
+- **Service** can be in **multiple permissions**
 
-## Relationships
+### Relationship Types
+- **One-to-One**: User ↔ Profile
+- **One-to-Many**: Profile → Permission, Permission → Service
+- **Many-to-Many**: Permission ↔ Profile, Service ↔ Permission
 
-- One-to-one relationship: User to Profile
-- One-to-many relationship: Profile to Permission, Permission to Service
-- Many-to-many relationship: Permission to Profile, Service to Permission
+## Database Schema Structure
 
-## Schema
+### Core Tables
+- **User**: Primary key (id), user information
+- **Profile**: Primary key (id), profile information
+- **Permission**: Primary key (id), permission information
+- **Service**: Primary key (id), service information
 
-### User
-
-- Primary key: id
-- Columns: (other user information)
-
-### Profile
-
-- Primary key: id
-- Columns: (other profile information)
-
-### Permission
-
-- Primary key: id
-- Columns: (other permission information)
-
-### Service
-
-- Primary key: id
-- Columns: (other service information)
-
-### User-Profile Table
-
-- Columns: user_id (foreign key referencing User.id), profile_id (foreign key referencing
-  Profile.id)
-
-### Profile-Permission Table
-
-- Columns: profile_id (foreign key referencing Profile.id), permission_id (foreign key referencing
-  Permission.id)
-
-### Permission-Service Table
-
-- Columns: permission_id (foreign key referencing Permission.id), service_id (foreign key
-  referencing Service.id)
+### Junction Tables
+- **User-Profile**: user_id, profile_id (foreign keys)
+- **Profile-Permission**: profile_id, permission_id (foreign keys)
+- **Permission-Service**: permission_id, service_id (foreign keys)

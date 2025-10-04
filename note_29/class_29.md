@@ -1,47 +1,69 @@
-# Explaining Seeder.js:
+# Sequelize ORM and Authentication Strategy - Class 29
 
-This codebase uses Sequelize as an Object Relational Mapping (ORM) tool to define and manage the
-database schema. The database has the following tables and their respective relations:
+## Sequelize ORM Database Schema
 
-## Tables
+This codebase uses **Sequelize** as an Object Relational Mapping (ORM) tool to define and manage the database schema.
 
-- User: stores user information such as email, first name, last name, and password. Each user can
-  have a profile and belong to many services.
-- Profile: stores profile information such as name, description, and type. Each profile can belong
-  to many users and have many permissions.
-- Permission: stores permission information such as name, description, and type. Each permission can
-  belong to many profiles and have many services.
-- Service: stores service information such as name and description. Each service can belong to many
-  permissions and have many users.
-- ServicePermission: a junction table between Service and Permission tables to represent the
-  many-to-many relationship between them. Each service can have many permissions and each permission
-  can be assigned to many services.
-- PermissionProfile: a junction table between Permission and Profile tables to represent the
-  many-to-many relationship between them. Each permission can be assigned to many profiles and each
-  profile can have many permissions.
+### Database Tables and Relations
 
-## Relations
+#### Core Tables
 
-- User has a foreign key to Profile.
-- User has a many-to-many relationship with Service through the ServicePermission junction table.
-- Profile has a many-to-many relationship with Permission through the PermissionProfile junction
-  table.
-- Permission has a many-to-many relationship with Service through the ServicePermission junction
-  table.
+**User Table**
+- Stores user information (email, first name, last name, password)
+- Each user can have **one profile**
+- Each user can belong to **many services**
 
-# Explaining strategy:
+**Profile Table**
+- Stores profile information (name, description, type)
+- Each profile can belong to **many users**
+- Each profile can have **many permissions**
+
+**Permission Table**
+- Stores permission information (name, description, type)
+- Each permission can belong to **many profiles**
+- Each permission can have **many services**
+
+**Service Table**
+- Stores service information (name, description)
+- Each service can belong to **many permissions**
+- Each service can have **many users**
+
+#### Junction Tables
+
+**ServicePermission Table**
+- Junction table between Service and Permission tables
+- Represents **many-to-many** relationship
+- Each service can have many permissions
+- Each permission can be assigned to many services
+
+**PermissionProfile Table**
+- Junction table between Permission and Profile tables
+- Represents **many-to-many** relationship
+- Each permission can be assigned to many profiles
+- Each profile can have many permissions
+
+### Database Relations
+
+1. **User** has a foreign key to **Profile**
+2. **User** has a many-to-many relationship with **Service** through ServicePermission junction table
+3. **Profile** has a many-to-many relationship with **Permission** through PermissionProfile junction table
+4. **Permission** has a many-to-many relationship with **Service** through ServicePermission junction table
 
 ---
 
-1. strategy create hobe j route ta use korbe tar jonno.
-2. strategy mane holo , ekta user already logged in kina ta check kora.
-3. stretegy banano hoy user der jonno.
-4. j login korbe tar jonno stretegy make kora hobe.
-5. api/permissions api route ti j use korbe strategy ta make kora hobe tar jonno.
+## Authentication Strategy Implementation
 
----
+### Strategy Purpose
 
-```javascript
+1. **Route-Specific Strategy**: Strategy is created for the specific route that will use it
+2. **User Authentication Check**: Strategy checks if a user is already logged in
+3. **User-Specific Strategy**: Strategy is created for users who will log in
+4. **Login Strategy**: Strategy is made for users who will perform login
+5. **API Route Strategy**: Strategy is created for the specific API route (e.g., `/api/permissions`)
+
+### Passport Strategy Implementation
+
+```js
 class Passport {
     use(x, obj) {
         this.strategyName = x;
@@ -59,6 +81,7 @@ class Passport {
     }
 }
 
+// Strategy Configuration
 passport.use(
     "user-jwt",
     new Strategy({ secretOrKey, cookieExtractor }, function (payload, done) {
@@ -68,7 +91,7 @@ passport.use(
     }),
 );
 
-// /users route -> patch method
+// Authentication Middleware for /users route (PATCH method)
 function AuthStrategy(req, res, next) {
     const auth = passport.authenticate("user-jwt", function (err, user) {
         if (!user) return res.status(401).send("Unauthenticated user");
@@ -80,3 +103,11 @@ function AuthStrategy(req, res, next) {
     auth(req, res, next);
 }
 ```
+
+### Strategy Components
+
+- **Strategy Name**: "user-jwt" for JWT-based authentication
+- **Secret Key**: Used for JWT token verification
+- **Cookie Extractor**: Extracts JWT token from cookies
+- **Callback Function**: Handles user verification and authentication
+- **Authentication Middleware**: Protects routes requiring authentication

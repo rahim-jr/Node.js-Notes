@@ -1,27 +1,59 @@
-There are 5 types of request:
+# HTTP Request Methods and OSI Model - Class 15
 
-1. get request: clients wants to have some information, we will send the information to the client!
+## HTTP Request Methods
 
-2. post: create: I will take some information from the client, I will create some information, save
-   it to the database.
+There are 5 main types of HTTP requests:
 
-3. put: update : total information update.
+### 1. GET Request
+- **Purpose**: Client wants to retrieve information
+- **Action**: Server sends information to the client
+- **Example**: Fetching a list of posts
 
-4. patch: partialy update information stored in the database.
+### 2. POST Request
+- **Purpose**: Create new resources
+- **Action**: Server takes information from client, creates new data, saves to database
+- **Example**: Creating a new post
 
-5. delete: to delete information.
+### 3. PUT Request
+- **Purpose**: Complete update of existing resource
+- **Action**: Total information update
+- **Example**: Updating all fields of a post
 
-Facebook: 1. view status list: client will send me get request. I will send status list to the
-cliend.
+### 4. PATCH Request
+- **Purpose**: Partial update of existing resource
+- **Action**: Update only specific fields of stored information
+- **Example**: Updating only the title of a post
 
-    2. Status create: post request, create post in database.
+### 5. DELETE Request
+- **Purpose**: Remove resources
+- **Action**: Delete information from database
+- **Example**: Deleting a post
 
-    3. status update: put: status update.
+## Facebook Example
 
-    4. Status partially udate: patch: status update partially.
+Using Facebook status feature as an example:
 
-    5. status delete: delete : delete status.
+1. **View Status List**: Client sends GET request → Server sends status list
+2. **Create Status**: Client sends POST request → Server creates post in database
+3. **Update Status**: Client sends PUT request → Server updates entire status
+4. **Partial Update**: Client sends PATCH request → Server updates specific fields
+5. **Delete Status**: Client sends DELETE request → Server removes status
 
-OSI Model: 1. physical 2. data link 3. network 4. transport layer -> responsible , ekta computer e
-koyta port create kora shomvob. 5. sesson layer 6. presentation 7. application There are 65535 ports
-available in a computer.
+## OSI Model (Open Systems Interconnection)
+
+The OSI model has 7 layers:
+
+1. **Physical Layer** - Hardware and physical connections
+2. **Data Link Layer** - Error detection and correction
+3. **Network Layer** - Routing and addressing
+4. **Transport Layer** - Responsible for port management
+   - Determines how many ports can be created on a computer
+   - **Total available ports**: 65,535 ports per computer
+5. **Session Layer** - Manages communication sessions
+6. **Presentation Layer** - Data encryption and compression
+7. **Application Layer** - User interface and application services
+
+### Port Management
+- Each computer can have up to **65,535 ports**
+- Ports are managed by the Transport Layer
+- Ports allow multiple services to run simultaneously on one computer

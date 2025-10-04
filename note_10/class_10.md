@@ -1,46 +1,106 @@
-1. asking question from set timeout.
+# JavaScript Advanced Concepts - Class 10
 
-// for (var i =1; i <= 5; i++) { // ekhane 5 ta block create hocche, kintu shobar shesh e memory
-leak hocche..karon var holo global scope e reside kore. var dile shobgula function er jonno lexical
-environment 1tai. // setTimeout( // () => { // console.log(i); // }, i\*1000) // }
+## 1. setTimeout Questions and Memory Leak Issues
 
-// for (let i =1; i <= 5; i++) { // ekhane 5 ta block create hocche, ebong 5 ta lexical environment
-create hocche. let diye define korar jonno i ta 5 bar alada alada value tar vitore alada alada block
-scope e rekhe dicche. jar karone memory leak hocche na. // setTimeout( // () => { // console.log(i);
-// }, i\*1000) // }
+### Problem with `var` in Loops
 
-// for (var i=1; i <= 5; i++) { // console.log(i); // }
+When using `var` in a for loop with setTimeout, all functions share the same lexical environment, causing memory leaks because `var` resides in global scope.
 
-// -----first class function forEach
+```js
+// PROBLEMATIC CODE - Memory leak occurs
+for (var i = 1; i <= 5; i++) {
+    // Here 5 blocks are created, but at the end memory leak occurs
+    // because var resides in global scope. With var, all functions share the same lexical environment
+    setTimeout(() => {
+        console.log(i); // Will print 6, 6, 6, 6, 6
+    }, i * 1000);
+}
+```
 
-// const arr = [1,2,3,4,5]
+### Solution with `let`
 
-function print(number, index) { // console.log(number, index); }
+When using `let`, 5 separate blocks are created with 5 separate lexical environments. Each `let` declaration creates a separate block scope, preventing memory leaks.
 
-// print(3, 2); // print(6, 1);
+```js
+// CORRECT CODE - No memory leak
+for (let i = 1; i <= 5; i++) {
+    // Here 5 blocks are created, and 5 lexical environments are created
+    // let creates separate block scope for each iteration, preventing memory leak
+    setTimeout(() => {
+        console.log(i); // Will print 1, 2, 3, 4, 5
+    }, i * 1000);
+}
+```
 
-const arr = [1,2,3,4,5];
+### Simple Loop Example
 
-arr.forEach(print); // forEach ta holo ekti native function ja js creator ra natively code kore
-rekhe diyechen. forEach ekti first class function. ja tar parameter e ekti callback function k
-expect kore . parameter e thaka callback function ti totobar e call hobe joto gulo value forEach k
-call kora array'r vitor thakbe. ei khetre array ekti object er chadore muriye giyeche. foreach
-function ti jokhon callback function k call kore tokhon callback function er parameter e 2ti
-argument pass kore. jar ekti holo number or array er vitore thaka data gulo, r ditio argument ti
-holo oi array er index. tar mane amader callback function ti k call korar time e forEach function ti
-callback function er parameter e 2 ti argument expect kore. amra shobshomoy forEach function use
-korbo..kokhono for loop use korbo na.
+```js
+for (var i = 1; i <= 5; i++) {
+    console.log(i); // Prints 1, 2, 3, 4, 5
+}
+```
 
-void forEach(callback) { for (var i = 0; i < this.leng; i++) { callback(arr[i], i);
+## 2. First-Class Function: forEach
 
-    }
+### Understanding forEach
 
+`forEach` is a native function that JavaScript creators have natively coded. `forEach` is a first-class function that expects a callback function as its parameter.
+
+```js
+const arr = [1, 2, 3, 4, 5];
+
+function print(number, index) {
+    console.log(number, index);
 }
 
----
+// Test the function
+print(3, 2); // Output: 3 2
+print(6, 1); // Output: 6 1
 
-2. object & class...
-3. ekta object e key : value akare shob joma thake..ebong eke opore key : value diye saparate
-   thake...
-4. key = property.
-5. object is non premitive data type.
+// Using forEach
+arr.forEach(print);
+```
+
+### How forEach Works
+
+- `forEach` is a first-class function that expects a callback function as parameter
+- The callback function is called as many times as there are values in the array
+- In this case, the array is treated as an object
+- When `forEach` calls the callback function, it passes 2 arguments:
+  1. **First argument**: The data/value from the array
+  2. **Second argument**: The index of that array element
+
+### forEach Implementation (Simplified)
+
+```js
+void forEach(callback) {
+    for (var i = 0; i < this.length; i++) {
+        callback(arr[i], i);
+    }
+}
+```
+
+**Important**: Always use `forEach` function, never use `for` loops.
+
+## 3. Objects and Classes
+
+## 4. Object Structure
+
+- In an object, everything is stored in **key: value** format
+- Each **key: value** pair is separate from others
+- **Key** = **Property**
+- **Object** is a **non-primitive data type**
+
+### Example
+
+```js
+const person = {
+    name: "John",        // key: "name", value: "John"
+    age: 25,            // key: "age", value: 25
+    city: "New York"    // key: "city", value: "New York"
+};
+
+console.log(person.name);  // "John"
+console.log(person.age);   // 25
+console.log(person.city);  // "New York"
+```
