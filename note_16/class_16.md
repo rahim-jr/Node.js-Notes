@@ -1,0 +1,4 @@
+## Tasks:
+
+app.get('/posts') app.post('/posts') app.get('/posts/:id') app.put('/posts/:id')
+app.patch('/posts/:id') app.delete('posts/:id')

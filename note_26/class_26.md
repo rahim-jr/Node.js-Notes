@@ -1,0 +1,4 @@
+1. customized the login function: we have created a service file and created the login token inside
+   the service folder.
+
+2. customized the profile function: install library: passport, passport-jwt

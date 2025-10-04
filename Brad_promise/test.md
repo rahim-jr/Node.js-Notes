@@ -4,7 +4,7 @@ function print(resolve, reject) {
     console.log(resolve, reject);
     setTimeout(() => {
         console.log("Call stack e ashsi");
-        const user = [1,2,3];
+        const user = [1, 2, 3];
         resolve(user);
     }, 2000);
 }
@@ -37,13 +37,14 @@ const prom1 = new Promise(print);
 console.log(prom1);
 
 prom1
-.then(result => {
-    console.log(result);
-})
-.catch(err => {
-    console.log(err);
-});
+    .then(result => {
+        console.log(result);
+    })
+    .catch(err => {
+        console.log(err);
+    });
 
 console.log("end");
 ```
-* We have to use async before the function that has promise inside of it
+
+- We have to use async before the function that has promise inside of it

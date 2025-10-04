@@ -1,18 +1,18 @@
 ```javascript
 const posts = [
     {
-        title: 'post one',
-        body: 'this is post one'
+        title: "post one",
+        body: "this is post one",
     },
     {
-        title: 'post two',
-        body: 'this is post two'
-    }   
-]
+        title: "post two",
+        body: "this is post two",
+    },
+];
 
 function getPosts() {
     setTimeout(() => {
-        let output = '';
+        let output = "";
         posts.forEach((post, index) => {
             output += `<li>${post.title}</li>`;
         });
@@ -30,9 +30,8 @@ function createPost(post) {
             if (!error) {
                 resolve();
             } else {
-                reject('Error: Something went wrong');
+                reject("Error: Something went wrong");
             }
-
         }, 2000);
     });
 }
@@ -42,7 +41,7 @@ function createPost(post) {
 //     .catch(err => console.log(err));
 
 async function init() {
-    await createPost({ title: 'Post Three', body: 'This is post three' })
+    await createPost({ title: "Post Three", body: "This is post three" });
 
     getPosts();
 }
