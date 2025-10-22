@@ -5,24 +5,24 @@
 
 Example:
 ```js
-greet(); // ✅ works due to hoisting
+  greet(); // ✅ works due to hoisting
 
-function greet() {
-    console.log("Hello Rahim");
-}
+  function greet() {
+      console.log("Hello Rahim");
+  }
 ```
 
 ## 2. Function Expression
-- A function stored inside a variable.
-- Not hoisted fully → only the variable is hoisted (with undefined), not the function body.
+  - A function stored inside a variable.
+  - Not hoisted fully → only the variable is hoisted (with undefined), not the function body.
 
 Example:
 ```js
-sayHi(); // ❌ TypeError: sayHi is not a function
+  sayHi(); // ❌ TypeError: sayHi is not a function
 
-var sayHi = function() {
-    console.log("Hi Rahim");
-};
+  var sayHi = function() {
+      console.log("Hi Rahim");
+  };
 ```
 
 ## 3. Arrow Function (from ES6)
@@ -32,8 +32,8 @@ var sayHi = function() {
 
 Example:
 ```js
-const add = (a, b) => a + b;
-console.log(add(2, 3)); // 5
+  const add = (a, b) => a + b;
+  console.log(add(2, 3)); // 5
 ```
 
 ## 4. Anonymous Function
@@ -42,9 +42,9 @@ console.log(add(2, 3)); // 5
 
 Example:
 ```js
-setTimeout(function() {
-    console.log("Hello from anonymous function");
-}, 1000);
+  setTimeout(function() {
+      console.log("Hello from anonymous function");
+  }, 1000);
 ```
 
 ## 5. IIFE (Immediately Invoked Function Expression)
@@ -53,9 +53,9 @@ setTimeout(function() {
 
 Example:
 ```js
-(function() {
-    console.log("IIFE runs immediately!");
-})();
+  (function() {
+      console.log("IIFE runs immediately!");
+  })();
 ```
 
 ## 6. Lexical Environment
@@ -66,14 +66,14 @@ Example:
 
 Example:
 ```js
-function outer() {
-    let x = 10;
-    function inner() {
-        console.log(x); // inner has access to outer's x
-    }
-    inner();
-}
-outer(); // 10
+  function outer() {
+      let x = 10;
+      function inner() {
+          console.log(x); // inner has access to outer's x
+      }
+      inner();
+  }
+  outer(); // 10
 ```
 
 ## 7. Scope Chain
@@ -82,16 +82,16 @@ outer(); // 10
 
 Example:
 ```js
-let a = "Global";
-function outer() {
-    let b = "Outer";
-    function inner() {
-        let c = "Inner";
-        console.log(a, b, c); // finds variables via scope chain
-    }
-    inner();
-}
-outer(); // Global Outer Inner
+  let a = "Global";
+  function outer() {
+      let b = "Outer";
+      function inner() {
+          let c = "Inner";
+          console.log(a, b, c); // finds variables via scope chain
+      }
+      inner();
+  }
+  outer(); // Global Outer Inner
 ```
 
 ## 8. Scope
@@ -103,12 +103,12 @@ Defines where a variable is accessible. Types in JS:
 
 Example:
 ```js
-{
-    let x = 10;  // block scope
-    var y = 20;  // function/global scope
-}
-console.log(y); // ✅ 20
-console.log(x); // ❌ ReferenceError
+  {
+      let x = 10;  // block scope
+      var y = 20;  // function/global scope
+  }
+  console.log(y); // ✅ 20
+  console.log(x); // ❌ ReferenceError
 ```
 
 ## 9. Shadowing
@@ -118,13 +118,14 @@ console.log(x); // ❌ ReferenceError
 
 Example:
 ```js
-let x = 10;
-function test() {
-    let x = 20;  // shadows outer x
-    console.log(x); // 20
-}
-test();
-console.log(x); // 10
+  let x = 10;
+  function test() {
+      let x = 20;  // shadows outer x
+      console.log(x); // 20
+  }
+
+  test();
+  console.log(x); // 10
 ```
 
 ## 10. ✅ Big Picture

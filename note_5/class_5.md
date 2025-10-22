@@ -4,30 +4,30 @@
 
 In JavaScript, functions are treated like values (citizens). This is what makes them "first-class."
 
-- Assign a function to a variable
-- Pass a function as an argument to another function
-- Return a function from another function
+  - Assign a function to a variable
+  - Pass a function as an argument to another function
+  - Return a function from another function
 
 Example:
 ```js
-// Assign function to a variable
-const sayHi = function() {
-    console.log("Hello Rahim");
-};
+  // Assign function to a variable
+  const sayHi = function() {
+      console.log("Hello Rahim");
+  };
 
-// Pass function as argument
-function greet(fn) {
-    fn();
-}
-greet(sayHi); // "Hello Rahim"
+  // Pass function as argument
+  function greet(fn) {
+      fn();
+  }
+  greet(sayHi); // "Hello Rahim"
 
-// Return a function
-function outer() {
-    return function inner() {
-        console.log("I was returned!");
-    };
-}
-outer()(); // "I was returned!"
+  // Return a function
+  function outer() {
+      return function inner() {
+          console.log("I was returned!");
+      };
+  }
+  outer()(); // "I was returned!"
 ```
 
 Because functions are first-class, we can build callbacks, higher-order functions, promises, async/await, etc.

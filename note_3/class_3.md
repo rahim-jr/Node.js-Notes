@@ -29,6 +29,8 @@ greet();
 function greet() {
     console.log("Hello");
 }
+
+output: Hello
 ```
 
 ## 4. Function Call
@@ -38,7 +40,7 @@ function greet() {
 
 Example:
 ```js
-greet(); // function call
+  greet(); // function call
 ```
 
 ## 5. Arguments vs Parameters
@@ -47,10 +49,10 @@ greet(); // function call
 
 Example:
 ```js
-function add(a, b) { // a & b = parameters
-    return a + b;
-}
-add(3, 4); // 3 & 4 = arguments
+  function add(a, b) { // a & b = parameters
+      return a + b;
+  }
+  add(3, 4); // 3 & 4 = arguments
 ```
 
 ## 6. Hoisting
@@ -59,11 +61,11 @@ add(3, 4); // 3 & 4 = arguments
 
 Example:
 ```js
-sayHi(); // works
-console.log(x); // undefined
+  sayHi(); // works
+  console.log(x); // undefined
 
-function sayHi() { console.log("Hello"); }
-var x = 10;
+  function sayHi() { console.log("Hello"); }
+  var x = 10;
 ```
 
 ## 7. Reference Error
@@ -72,7 +74,7 @@ Happens when you try to use a variable that doesn't exist in memory.
 
 Example:
 ```js
-console.log(y); // ReferenceError: y is not defined
+  console.log(y); // ReferenceError: y is not defined
 ```
 
 ## 8. Type Error
@@ -81,13 +83,13 @@ Happens when you try to perform an operation on a value of the wrong type.
 
 Example:
 ```js
-var num = 5;
-num.toUpperCase(); // TypeError: num.toUpperCase is not a function
+  var num = 5;
+  num.toUpperCase(); // TypeError: num.toUpperCase is not a function
 ```
 
 ## 9. Big Picture
-- Execution Context + Call Stack = How JS runs code
-- Function statement + Function call = How functions are defined & used
-- Arguments vs Parameters = How data passes into functions
-- Hoisting = Why you can call functions before they are declared
-- Reference Error & Type Error = Common runtime pitfalls
+  - Execution Context + Call Stack = How JS runs code
+  - Function statement + Function call = How functions are defined & used
+  - Arguments vs Parameters = How data passes into functions
+  - Hoisting = Why you can call functions before they are declared
+  - Reference Error & Type Error = Common runtime pitfalls

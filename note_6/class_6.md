@@ -4,15 +4,15 @@ A single expression is any one-liner piece of code that produces a value. In Jav
 
 Examples:
 ```js
-2 + 3              // Expression (returns 5)
-"Rahim"            // Expression (returns "Rahim")
-x = 10             // Expression (returns 10)
-console.log("Hi")  // Expression (returns undefined)
+  2 + 3              // Expression (returns 5)
+  "Rahim"            // Expression (returns "Rahim")
+  x = 10             // Expression (returns 10)
+  console.log("Hi")  // Expression (returns undefined)
 ```
 
 In arrow functions, single expressions allow you to skip return and {}:
 ```js
-const add = (a, b) => a + b; // implicit return (single expression)
+  const add = (a, b) => a + b; // implicit return (single expression)
 ```
 
 ✅ **Takeaway**: Expressions always produce a value; statements control flow.
@@ -23,10 +23,10 @@ A function expression is when a function is assigned to a variable or passed as 
 
 Example:
 ```js
-const greet = function() {
-    console.log("Hello Rahim");
-};
-greet();
+  const greet = function() {
+      console.log("Hello Rahim");
+  };
+  greet();
 ```
 
 - Not hoisted like function declarations.
@@ -43,7 +43,7 @@ Let's see how:
 
 **Function Call**: Executes a function.
 ```js
-greet(); // calls greet function
+  greet(); // calls greet function
 ```
 
 **Grouping Operator**: Changes the order of execution.
@@ -53,16 +53,16 @@ console.log((2 + 3) * 4); // 20, not 14
 
 **IIFE (Immediately Invoked Function Expression)**: Runs a function immediately.
 ```js
-(function() {
-    console.log("Runs instantly");
-})();
+  (function() {
+      console.log("Runs instantly");
+  })();
 ```
 
 The outer parentheses force the JS engine to treat the function as an expression, not a declaration.
 
 **Arrow Functions**: Parentheses wrap parameters.
 ```js
-const add = (a, b) => a + b;
+  const add = (a, b) => a + b;
 ```
 
 ✅ **Takeaway**: Parentheses control how and when functions execute — they're the difference between declaring a function and invoking it.

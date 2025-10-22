@@ -9,9 +9,11 @@ The JavaScript engine stores the variable name as a reference (or key) in memory
 ## 2. Execution context
 
 - Execution Context = the environment in which a piece of JS code runs.
-- It contains all the information the engine needs to execute code: variables, functions, and `this`. Types:
+- It contains all the information the engine needs to execute code: variables, functions, and `this`.
+Types:
 - Global Execution Context (GEC): Created first, when your program starts.
-- Function Execution Context (FEC): Created whenever a function is invoked. Each context has:
+- Function Execution Context (FEC): Created whenever a function is invoked.
+Each context has:
   - Memory/Variable Environment (where variables & functions are stored)
   - Thread of execution (the actual code being executed step by step)
 
@@ -23,9 +25,9 @@ The JavaScript engine stores the variable name as a reference (or key) in memory
 
 Example:
 ```js
-function greet() {
-    var name = "Rahim";
-}
+  function greet() {
+      var name = "Rahim";
+  }
 ```
 
 Memory Component before execution: `greet → function reference`, `name → undefined`
@@ -48,11 +50,11 @@ In this phase:
 
 Example:
 ```js
-sayHi();
-var name = "Rahim";
-function sayHi() { 
-    console.log("Hello"); 
-}
+  sayHi();
+  var name = "Rahim";
+  function sayHi() {
+      console.log("Hello");
+  }
 ```
 
 Creation Phase result: `name → undefined`, `sayHi → function definition`
@@ -77,13 +79,13 @@ Using the example above:
 
 Example:
 ```js
-function one() {
-    two();
-}
-function two() {
-    console.log("Inside two");
-}
-one();
+  function one() {
+      two();
+  }
+  function two() {
+      console.log("Inside two");
+  }
+  one();
 ```
 
 Call Stack process:
