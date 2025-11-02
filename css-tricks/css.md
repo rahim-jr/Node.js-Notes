@@ -1,4 +1,3 @@
-
 # CSS Core Concepts
 
 ## Box Sizing
